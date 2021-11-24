@@ -9,7 +9,6 @@ database::check_user(std::string const &username, std::string const &password)
 
     while (ifs >> line)
     {
-        printf("line = %s\n username = %s\n", line.c_str(), username.c_str());
         if (boost::starts_with(line, username))
         {
             ifs.clear();

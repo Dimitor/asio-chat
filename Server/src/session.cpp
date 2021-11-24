@@ -39,7 +39,6 @@ void session::read()
 
 void session::write()
 {
-   // printf("msg = %s", msg_queue.front().c_str());
     asio::async_write(socket, asio::buffer(msg_queue.front()), std::bind(&session::writer, shared_from_this(), _1, _2));
 }
 
@@ -71,11 +70,9 @@ void session::reader(err_code err, size_t bytes_count)
 {
     if (!err)
     {
-        //printf("we start read\n");
         auto bufdata = buf.data();
         std::string message(asio::buffers_begin(bufdata), asio::buffers_begin(bufdata) + bytes_count);
         buf.consume(bytes_count);
-        //printf("reader..OK\nmsg = %s\n", msg.c_str());
         msg_h(message);
         read();
     }
@@ -90,9 +87,7 @@ void session::writer(err_code err, size_t bytes_count)
 {
     if (!err)
     {
-       // printf("username = %s", username.c_str());
         msg_queue.pop();
-       // printf("writer..OK\n");
         if (!msg_queue.empty())
         {
             write();
@@ -109,7 +104,5 @@ std::pair<std::string, std::string> session::split_record(std::string const &rec
 {
     std::vector<std::string> record_parts;
     boost::split(record_parts, record, boost::is_any_of(":"));
-    // if (record_parts.size() != 2)
-    //     printf("!!! record_parts size = %d", record_parts.size());
     return std::make_pair(record_parts[0], record_parts[1]);
 }

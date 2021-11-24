@@ -27,8 +27,6 @@ struct session: std::enable_shared_from_this<session>
 
     void start(msg_handler &&msg_func, err_handler &&err_func, auth_handler &&auth_func);
 
-    //void set_name(std::string const &name){username = name;}
-
     void send_msg(std::string const &msg);
 
     std::string get_username() const {return username;}
@@ -61,5 +59,4 @@ private:
     err_handler err_h;
     auth_handler auth_h;
     std::string username;
-    //std::weak_ptr<server> srv;
 };

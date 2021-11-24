@@ -3,7 +3,6 @@
 database::user_state 
 database::check_user(std::string const &username, std::string const &password)
 {
-    std::string record{username + ":" + password};
     std::string line;
     ifs.seekg(0);
 

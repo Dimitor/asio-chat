@@ -11,7 +11,8 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    try{
+    try
+    {
         std::string port{argv[1]};
         io_context context;
         server serv{context, std::stoi(port), "users.txt"};
